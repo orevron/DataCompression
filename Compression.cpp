@@ -30,8 +30,8 @@ void Compression::readData(std::string path) {
  */
 bool Compression::UD_check() {
     int *steps = new int;
-    for (int i = 0; i < sizeof(list_of_words) / sizeof(int); i++) {
-        for (int j = 0; j < sizeof(list_of_words) / sizeof(int); j++) {
+    for (size_t i = 0; i < sizeof(list_of_words) / sizeof(int); i++) {
+        for (size_t j = 0; j < sizeof(list_of_words) / sizeof(int); j++) {
             if (i != j) {
                 if (startsWith(list_of_words[i], list_of_words[j], steps)) {
                     int temp = list_of_words[j] << *(steps);
@@ -47,11 +47,10 @@ bool Compression::UD_check() {
  * Looks for all danglings in the list of words, in order to confirm UD
  */
 bool Compression::isDanglingInCode() {
-    for (int current : dangling) {
-        if (contains(current)) {
+    for(size_t i = 0; i < sizeof(dangling) / sizeof(int); i++) {
+        if(contains(dangling[i])){
             return false;
         }
-    }
     return true;
 }
 
@@ -59,8 +58,8 @@ bool Compression::isDanglingInCode() {
  * Looks for one dangling in the list of words
  */
 bool Compression::contains(int word) {
-    for (int i : list_of_words) {
-        if (word == i) {
+    for(size_t i = 0; i < sizeof(list_of_words) / sizeof(int); i++){
+        if(word == i){
             return true;
         }
     }
