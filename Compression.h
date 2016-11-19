@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <cmath>
+
 
 #ifndef DATACOMPRESSION_COMPRESSION_H
 #define DATACOMPRESSION_COMPRESSION_H
@@ -18,7 +20,6 @@ class Compression {
     public:
         Compression(std::string path);
         bool UD_check();
-
 };
 
 

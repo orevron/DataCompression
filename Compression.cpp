@@ -1,4 +1,3 @@
-#include <cmath>
 #include "Compression.h"
 
 /**
@@ -85,6 +84,9 @@ bool Compression::startsWith(int word1, int word2, int *steps) {
     return false;
 }
 
+/**
+ * Extract the value of the word from the string
+ */
 int Compression::extractValue(char *line) {
     int index = 4, ind = 0, check = line[index++], counter = 0, ar[50];
     while (check != 41) {

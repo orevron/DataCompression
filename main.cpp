@@ -16,6 +16,3 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
-
-
-//        "C:\\Users\\orevr\\ClionProjects\\data\\DataCompression\\test.txt";
