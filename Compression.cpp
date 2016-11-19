@@ -1,3 +1,4 @@
+#include <cmath>
 #include "Compression.h"
 
 /**
@@ -13,7 +14,7 @@ Compression::Compression(std::string path) : dangling(0), list_of_words(0) {
 void Compression::readData(std::string path) {
     std::ifstream file;
     file.open(path, file.in);
-    char *line;
+    char line[256];
     if (file.is_open()) {
         while (!file.eof()) {
             file.getline(line, 256);
@@ -27,12 +28,16 @@ void Compression::readData(std::string path) {
  * Manage the UD check algorithm
  */
 bool Compression::UD_check() {
-    int *steps;
+    int *steps = new int;
     for (int i = 0; i < sizeof(list_of_words) / sizeof(int); i++) {
         for (int j = 0; j < sizeof(list_of_words) / sizeof(int); j++) {
             if (i != j) {
                 if (startsWith(list_of_words[i], list_of_words[j], steps)) {
-                    int temp = list_of_words[j] << *(steps);
+                    int val = 0;
+                    if (*(steps) != nullptr) {
+                        val = *(steps);
+                    }
+                    int temp = list_of_words[j] << val;
                     dangling.push_back((list_of_words[i] ^ temp));
                 }
             }
@@ -83,12 +88,16 @@ bool Compression::startsWith(int word1, int word2, int *steps) {
 }
 
 int Compression::extractValue(char *line) {
-    int bits = (line[1] - 48);
-    int index = 4;
-    int value = 0;
-    int current = line[index] - 48;
-    while (bits > 0) {
-
+    int index = 4, ind = 0, check = line[index++], counter = 0, ar[50];
+    while (check != 41) {
+        counter++;
+        ar[ind++] = check - 48;
+        check = line[index++];
     }
-    return value;
+    check = 0;
+    index = 0;
+    while (counter-- > 0) {
+        check += ar[--ind] * std::pow(10, index++);
+    }
+    return check;
 }
