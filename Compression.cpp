@@ -47,19 +47,20 @@ bool Compression::UD_check() {
  * Looks for all danglings in the list of words, in order to confirm UD
  */
 bool Compression::isDanglingInCode() {
-    for(size_t i = 0; i < sizeof(dangling) / sizeof(int); i++) {
-        if(contains(dangling[i])){
+    for (size_t i = 0; i < sizeof(dangling) / sizeof(int); i++) {
+        if (contains(dangling[i])) {
             return false;
         }
-    return true;
+        return true;
+    }
 }
 
 /**
  * Looks for one dangling in the list of words
  */
 bool Compression::contains(int word) {
-    for(size_t i = 0; i < sizeof(list_of_words) / sizeof(int); i++){
-        if(word == i){
+    for (size_t i = 0; i < sizeof(list_of_words) / sizeof(int); i++) {
+        if (word == i) {
             return true;
         }
     }
