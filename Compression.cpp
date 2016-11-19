@@ -33,11 +33,11 @@ bool Compression::UD_check() {
         for (int j = 0; j < sizeof(list_of_words) / sizeof(int); j++) {
             if (i != j) {
                 if (startsWith(list_of_words[i], list_of_words[j], steps)) {
-                    int val = 0;
-                    if (*(steps) != nullptr) {
-                        val = *(steps);
-                    }
-                    int temp = list_of_words[j] << val;
+//                    int val = 0;
+//                    if (*(steps) != nullptr) {
+//                        val = *(steps);
+//                    }
+                    int temp = list_of_words[j] << *(steps);
                     dangling.push_back((list_of_words[i] ^ temp));
                 }
             }
