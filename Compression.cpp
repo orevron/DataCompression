@@ -20,6 +20,8 @@ void Compression::readData(std::string path) {
             file.getline(line, 256);
             list_of_words.emplace_back(extractValue(line));
         }
+    } else {
+        std::cout << "Bad path." << std::endl;
     }
     file.close();
 }
